@@ -11,8 +11,10 @@ function Card(props){
             <p>{props.body}</p>
             </blockquote>
         </div>
-        <a href="#" onClick={props.view} class="btn btn-primary">View</a>
-        <a href="#" onClick={props.handleSaveOrDelete} class="btn btn-primary">{props.isSaved ? "Save" : "Delete"}</a>
+        <div className="btn-group-sm" role="group">
+            <button type="submit" onClick={props.view} className="btn btn-primary">View</button>
+            <button type="submit" onClick={props.handleSaveOrDelete} className="btn btn-primary">{props.isSaved ? "Save" : "Delete"}</button>
+        </div>
         </div>
     );
 }

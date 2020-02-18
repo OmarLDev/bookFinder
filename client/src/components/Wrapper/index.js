@@ -1,23 +1,24 @@
 import React from "react";
 import API from "../../utils/api";
 import Form from "../Form";
+import ResultList from "../ResultList/ResultList";
 
 class Wrapper extends React.Component{
     state = {
-        result: {}, 
+        result: [], 
         search: ""
     }
 
     // Function to search for books in the Google Books API
     searchBooks = bookName => {
         API.searchBooks(bookName)
-            .then(res => this.setState({result: res.data}))
+            .then(res => this.setState({result: res.data.items}))
             .catch(err => console.log(err))
     }
 
     // Initializing with an empty search
     componentDidMount = () => {
-        this.searchBooks("");
+        this.searchBooks("Harry Potter");
     }
 
     // Function to handle the search state
@@ -36,9 +37,12 @@ class Wrapper extends React.Component{
 
     render(){
         return(
-            <Form 
-                handleInputChange = {this.handleInputChange}
-                handleFormSubmit = {this.handleFormSubmit}/>
+            <div>
+                <Form 
+                    handleInputChange = {this.handleInputChange}
+                    handleFormSubmit = {this.handleFormSubmit}/>
+                <ResultList result={this.state.result}/>
+            </div>
         )
     };
 }
